@@ -23,5 +23,5 @@ def index(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', index),
+    path('home/', index),
 ]
