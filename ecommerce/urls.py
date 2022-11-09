@@ -15,16 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.shortcuts import render
-
-def home(request):
-    return render(request, 'home/index.html')
-
-def cadastrar(request):
-    return render(request, 'cadastro/cadastro.html')
+from app import views
 
 urlpatterns = [
-    path('', home),
-    path('cadastro/cadastro', cadastrar),
+    path('', views.home),
+    path('cadastro/', views.cadastrar),
+    path('inserir/', views.inserir),
     path('admin/', admin.site.urls),
 ]
