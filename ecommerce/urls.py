@@ -21,5 +21,6 @@ urlpatterns = [
     path('', views.home),
     path('cadastro/', views.cadastrar),
     path('inserir/', views.inserir),
+    path('login/', views.login),
     path('admin/', admin.site.urls),
 ]
