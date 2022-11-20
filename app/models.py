@@ -8,3 +8,12 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Produtos(models.Model):
+    nome = models.CharField(max_length=30)
+    preco = models.FloatField()
+    quantidade = models.BigIntegerField()
+    imagem = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.nome

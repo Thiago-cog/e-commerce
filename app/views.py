@@ -32,20 +32,32 @@ def inserir(request):
 def login(request):
 
     if request.method == 'POST':
+
         email = request.POST.get('email', None)
         password = request.POST.get('password', None)
+        context = {}
         
         with connection.cursor() as cursor:
             cursor.execute("SELECT true FROM app_cliente WHERE email = %s AND senha = %s", [email, password])
             result = cursor.fetchone()
+
+            cursor.execute("SELECT nome, sobrenome FROM app_cliente WHERE email = %s AND senha = %s", [email, password])
+            resultLogin = cursor.fetchone()
+
+            cursor.execute("SELECT * FROM app_produtos")
+            resultProdutos = cursor.fetchall()
            
         if result == None:
             result = [False] 
     
         if result[0] == True:
-            return render(request, 'home/produtos.html')
+
+            context['nome'] = resultLogin[0]
+            context['sobrenome'] = resultLogin[1]
+            context['produtos'] = resultProdutos
+
+            return render(request, 'home/produtos.html', context=context)
         else:
-            context = {}
             context['erro'] = True
             return render(request, 'cadastro/login.html', context=context)
     else:
